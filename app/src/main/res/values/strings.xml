@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">PressureHealth</string>
+
+    <string name="text_start">Start</string>
+    <string name="text_next">Next</string>
+    <string name="text_skip">Skip</string>
+    <string name="text_start_record">Start Record</string>
+    <string name="text_policy">Agree User Policy and Privacy Agreement</string>
+
+    <string name="text_step_title_1">Protecting the heart starts with healthy blood pressure</string>
+    <string name="text_step_title_2">Grasp blood pressure trends and predict a healthy future</string>
+    <string name="text_step_title_3">Record blood pressure and grasp the pulse of health</string>
+
+    <string name="text_step_content_1">Understand the importance of blood pressure and take the first step to maintain cardiovascular health</string>
+
+    <string name="title_record">Record</string>
+    <string name="title_record_more">More Record</string>
+    <string name="title_record_new">New Record</string>
+    <string name="title_info">Information</string>
+    <string name="title_setting">Setting</string>
+
+
+    <string name="title_alarm">Language</string>
+    <string name="title_language">Language</string>
+    <string name="title_share">Share</string>
+    <string name="title_privacy">Privacy setting</string>
+    <string name="title_policy">User Agreement</string>
+    <string name="title_contact">Contact information</string>
+    <string name="title_mail">abc@gmail.com</string>
+
+    <string name="title_set_time">Set time</string>
+    <string name="title_year">Year</string>
+    <string name="title_month">Month</string>
+    <string name="title_day">Day</string>
+    <string name="title_hour">Hour</string>
+    <string name="title_minute">Minute</string>
+    <string name="title_cancel">Cancel</string>
+    <string name="title_confirm">Confirm</string>
+
+    <string name="title_systolic">Systolic</string>
+    <string name="title_sys">SYS</string>
+    <string name="title_diastolic">Diastolic</string>
+    <string name="title_dia">DIA</string>
+    <string name="record_unit">mmHg</string>
+    <string name="record_unit2">/mmHg</string>
+
+    <string name="title_hypotension">Hypotension</string>
+    <string name="title_normal">Normal</string>
+    <string name="title_elevated">High</string>
+    <string name="title_hs1">Stage 1</string>
+    <string name="title_hs2">Stage 2</string>
+    <string name="title_crisis">Hypertension</string>
+
+    <string name="content_hypotension">(sys &lt;90 or dia &lt;60)</string>
+    <string name="content_normal">(sys 90–119 and dia 60–79)</string>
+    <string name="content_elevated">(sys 120–129 and dia 60–79)</string>
+    <string name="content_hs1">(sys 130–139 or dia 80–89)</string>
+    <string name="content_hs2">(sys 140–180 or dia 90–120)</string>
+    <string name="content_crisis">(sys 180+ or dia 120+)</string>
+
+    <string name="des_hypotension">Hypotension</string>
+    <string name="des_normal">Don’t worry! Your blood pressure is very good, try to keep it up! </string>
+    <string name="des_elevated">High blood pressure</string>
+    <string name="des_hs1">Hypertension Stage 1</string>
+    <string name="des_hs2">Hypertension Stage 2</string>
+    <string name="des_crisis">Hypertension</string>
+
+
+    <string name="add_record_now">+ Record now</string>
+    <string name="add_record_new">+ New record</string>
+    <string name="record_more">More</string>
+    <string name="record_recent">Recent records</string>
+    <string name="record_no">No record!</string>
+    <string name="record_now">Record now</string>
+    <string name="home_top_title">Blood pressure record</string>
+    <string name="home_top_content">Keep recording your blood pressure to understand your health status</string>
+
+</resources>
