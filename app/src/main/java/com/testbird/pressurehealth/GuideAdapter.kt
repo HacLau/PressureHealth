@@ -22,6 +22,7 @@ class GuideAdapter(private val context: Context) : PagerAdapter() {
         binding.stepImage.setImageResource(guideDataList[position].image)
         binding.stepTitle.text = context.getString(guideDataList[position].title)
         binding.stepContent.text = context.getString(guideDataList[position].content)
+        container.addView(binding.root)
         return binding.root
     }
 

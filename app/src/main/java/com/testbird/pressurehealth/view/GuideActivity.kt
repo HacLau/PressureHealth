@@ -1,5 +1,6 @@
 package com.testbird.pressurehealth.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -59,12 +60,17 @@ class GuideActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
-
         })
+
         binding.guideSkipNext.setOnClickListener {
-            if(binding.guideVp.currentItem < 2){
-                binding.guideVp.currentItem ++
-            }
+            nextClick()
+        }
+        binding.guideSkipNextImage.setOnClickListener{
+            nextClick()
+        }
+
+        binding.guideSkip.setOnClickListener {
+            startMainActivity()
         }
     }
 
@@ -78,10 +84,25 @@ class GuideActivity : AppCompatActivity() {
                         showStep()
                     }
                 }
-
             }
 
         },33,33)
+    }
+
+    private fun startMainActivity(){
+        startActivity(Intent(this,MainActivity::class.java))
+        finish()
+    }
+
+    private fun nextClick(){
+        when(binding.guideVp.currentItem){
+            0,1->{
+                binding.guideVp.currentItem ++
+            }
+            2 ->{
+                startMainActivity()
+            }
+        }
     }
 
 
