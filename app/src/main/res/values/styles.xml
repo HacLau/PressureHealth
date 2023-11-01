@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NumberPicker">
+        <attr name="seesize" format="integer" />
+        <attr name="selectedTextSize" format="float" />
+        <attr name="selectedTextColor" format="color|reference" />
+        <attr name="normalTextSize" format="float" />
+        <attr name="normalTextColor" format="color|reference" />
+    </declare-styleable>
+
+    <style name="popwin_anim_style" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
+</resources>

@@ -1,10 +1,11 @@
-package com.testbird.pressurehealth
+package com.testbird.pressurehealth.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
+import com.testbird.pressurehealth.R
 import com.testbird.pressurehealth.databinding.LayoutGuideItemBinding
 
 class GuideAdapter(private val context: Context) : PagerAdapter() {

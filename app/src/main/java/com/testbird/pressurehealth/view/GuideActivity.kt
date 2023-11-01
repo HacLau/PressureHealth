@@ -1,29 +1,38 @@
 package com.testbird.pressurehealth.view
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.testbird.pressurehealth.GuideAdapter
 import com.testbird.pressurehealth.R
+import com.testbird.pressurehealth.adapter.GuideAdapter
+import com.testbird.pressurehealth.base.BaseActivity
 import com.testbird.pressurehealth.databinding.ActivityGuideBinding
+import com.testbird.pressurehealth.helper.ContactHelper
+import com.testbird.pressurehealth.helper.log
+import com.testbird.pressurehealth.helper.or
+import com.testbird.pressurehealth.helper.yes
+import com.testbird.pressurehealth.viewmodel.ActivityModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
 
-class GuideActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityGuideBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityGuideBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initView()
+class GuideActivity : BaseActivity<ActivityGuideBinding, ActivityModel>() {
+    override fun initViewModel(): ActivityModel = ViewModelProvider(this)[ActivityModel::class.java]
+
+    override fun initViewBinding(): ActivityGuideBinding = ActivityGuideBinding.inflate(layoutInflater)
+
+    override fun initView() {
+        ContactHelper.isLauncherStart.or(funTrue = {
+            showSplash()
+        }, funFalse = {
+            showStart()
+        })
     }
 
-    private fun initView() {
+    private fun showStart() {
+        ContactHelper.isLauncherStart = true
         binding.guideSplashStart.visibility = View.VISIBLE
         binding.guideStep.visibility = View.GONE
         binding.btnStart.setOnClickListener {
@@ -37,21 +46,23 @@ class GuideActivity : AppCompatActivity() {
         startCountDownProgress()
     }
 
-    private fun showStep(){
+    private fun showStep() {
+        ContactHelper.isLauncherStep = true
         binding.guideSplashStart.visibility = View.GONE
         binding.guideStep.visibility = View.VISIBLE
         binding.guideVp.adapter = GuideAdapter(this)
-        binding.guideVp.addOnPageChangeListener(object :OnPageChangeListener{
+        binding.guideVp.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
 
             override fun onPageSelected(position: Int) {
-                when(position){
-                    0,1-> {
+                when (position) {
+                    0, 1 -> {
                         binding.guideSkipNext.text = getString(R.string.text_next)
                     }
-                    2->{
+
+                    2 -> {
                         binding.guideSkipNext.text = getString(R.string.text_start_record)
                     }
                 }
@@ -65,7 +76,7 @@ class GuideActivity : AppCompatActivity() {
         binding.guideSkipNext.setOnClickListener {
             nextClick()
         }
-        binding.guideSkipNextImage.setOnClickListener{
+        binding.guideSkipNextImage.setOnClickListener {
             nextClick()
         }
 
@@ -74,32 +85,39 @@ class GuideActivity : AppCompatActivity() {
         }
     }
 
-    private fun startCountDownProgress(){
-        Timer().schedule(object:TimerTask(){
+    private fun startCountDownProgress() {
+        var startCountDown = false
+        Timer().schedule(object : TimerTask() {
             override fun run() {
-                binding.guideProgress.progress ++
                 if (binding.guideProgress.progress >= 100) {
                     cancel()
-                    CoroutineScope(Dispatchers.Main).launch {
-                        showStep()
+                    startCountDown.yes {
+                        startCountDown = false
+                        "startMainActivity".log()
+                        CoroutineScope(Dispatchers.Main).launch {
+                            ContactHelper.isLauncherStep.or(funTrue = {
+                                startMainActivity()
+                            }, funFalse = {
+                                showStep()
+                            })
+                        }
                     }
+                } else {
+                    startCountDown = true
+                    binding.guideProgress.progress++
                 }
             }
 
-        },33,33)
+        }, 33, 33)
     }
 
-    private fun startMainActivity(){
-        startActivity(Intent(this,MainActivity::class.java))
-        finish()
-    }
-
-    private fun nextClick(){
-        when(binding.guideVp.currentItem){
-            0,1->{
-                binding.guideVp.currentItem ++
+    private fun nextClick() {
+        when (binding.guideVp.currentItem) {
+            0, 1 -> {
+                binding.guideVp.currentItem++
             }
-            2 ->{
+
+            2 -> {
                 startMainActivity()
             }
         }

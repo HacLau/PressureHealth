@@ -4,6 +4,7 @@
     <string name="text_start">Start</string>
     <string name="text_next">Next</string>
     <string name="text_skip">Skip</string>
+    <string name="text_time">August 19,2023</string>
     <string name="text_start_record">Start Record</string>
     <string name="text_policy">Agree User Policy and Privacy Agreement</string>
 
@@ -20,7 +21,7 @@
     <string name="title_setting">Setting</string>
 
 
-    <string name="title_alarm">Language</string>
+    <string name="title_alarm">Alarm</string>
     <string name="title_language">Language</string>
     <string name="title_share">Share</string>
     <string name="title_privacy">Privacy setting</string>
@@ -58,18 +59,19 @@
     <string name="content_hs2">(sys 140–180 or dia 90–120)</string>
     <string name="content_crisis">(sys 180+ or dia 120+)</string>
 
-    <string name="des_hypotension">Hypotension</string>
-    <string name="des_normal">Don’t worry! Your blood pressure is very good, try to keep it up! </string>
-    <string name="des_elevated">High blood pressure</string>
-    <string name="des_hs1">Hypertension Stage 1</string>
-    <string name="des_hs2">Hypertension Stage 2</string>
-    <string name="des_crisis">Hypertension</string>
+    <string name="des_hypotension">Stay adequately hydrated and exercise regularly.</string>
+    <string name="des_normal">Continue to maintain a healthy lifestyle. </string>
+    <string name="des_elevated">Pay attention to your diet and reduce salt intake.</string>
+    <string name="des_hs1">Improve your lifestyle, exercise regularly, and manage your diet.</string>
+    <string name="des_hs2">Consult a doctor early on, as medication may be necessary.</string>
+    <string name="des_crisis">Seek medical advice promptly and develop an appropriate treatment plan.</string>
 
 
     <string name="add_record_now">+ Record now</string>
     <string name="add_record_new">+ New record</string>
     <string name="record_more">More</string>
     <string name="record_recent">Recent records</string>
+    <string name="record_new_time">2023-08-04  14:35</string>
     <string name="record_no">No record!</string>
     <string name="record_now">Record now</string>
     <string name="home_top_title">Blood pressure record</string>
