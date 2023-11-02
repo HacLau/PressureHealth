@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import com.testbird.pressurehealth.BuildConfig
 import com.testbird.pressurehealth.model.Contacts
 import com.testbird.pressurehealth.model.ContentType
 import com.testbird.pressurehealth.model.InfoEntity
@@ -36,12 +37,29 @@ abstract class BaseActivity<V : ViewBinding, M : ViewModel> : AppCompatActivity(
         finish()
     }
 
-    fun startRecordNewActivity(type: ContentType,infoEntity: InfoEntity? = null,recordEntity: RecordEntity? =null,url:String? = null) {
+    fun startContentActivity(
+        type: ContentType,
+        title: String = "",
+        infoEntity: InfoEntity? = null,
+        recordEntity: RecordEntity? = null,
+        url: String? = null
+    ) {
         startActivity(Intent(this, ContentActivity::class.java).apply {
-            putExtra(Contacts.pageType, type)
+            putExtra(Contacts.pageType, type.type)
             putExtra(Contacts.infoEntity, infoEntity)
             putExtra(Contacts.recordEntity, recordEntity)
             putExtra(Contacts.url, url)
+            putExtra(Contacts.title, title)
         })
+    }
+
+
+    fun sharedMySelf() {
+        kotlin.runCatching {
+            startActivity(Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+            })
+        }
     }
 }

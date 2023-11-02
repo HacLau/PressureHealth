@@ -32,8 +32,8 @@ class NumberPicker :View{
     private lateinit var rect: Rect
     private var textPaint: TextPaint? = null
     private var selectedPaint: TextPaint? = null
-    private var onSelect: (String, Int) -> Unit = { _, _->}
-    private var onMove:(String, Int)-> Unit = { _, _->}
+    var onSelect: (String) -> Unit = { _->}
+    var onMove:(String)-> Unit = { _->}
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         initAttrs(attrs)
@@ -72,9 +72,9 @@ class NumberPicker :View{
         val tta = context!!.obtainStyledAttributes(attrs, R.styleable.NumberPicker)
         seeSize = tta.getInteger(R.styleable.NumberPicker_seesize, 5)
         selectedTextSize = tta.getFloat(R.styleable.NumberPicker_selectedTextSize, 60.0f)
-        selectedColor = tta.getColor(R.styleable.NumberPicker_selectedTextColor, context!!.resources.getColor(R.color.result_0))
+        selectedColor = tta.getColor(R.styleable.NumberPicker_selectedTextColor, context!!.resources.getColor(R.color.white))
         textSize = tta.getFloat(R.styleable.NumberPicker_normalTextSize, 50.0f)
-        textColor = tta.getColor(R.styleable.NumberPicker_normalTextColor, context!!.resources.getColor(R.color.result_1))
+        textColor = tta.getColor(R.styleable.NumberPicker_normalTextColor, context!!.resources.getColor(R.color.color_80))
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -85,7 +85,7 @@ class NumberPicker :View{
             MotionEvent.ACTION_UP -> {
                 anOffset = 0.0f
                 this.invalidate()
-                onSelect.invoke(getSelectedString(), index)
+                onSelect.invoke(getSelectedString())
             }
 
             MotionEvent.ACTION_MOVE -> {
@@ -107,7 +107,7 @@ class NumberPicker :View{
                         downX = scrollX
                     }
                 }
-                onMove.invoke(getSelectedString(), index)
+                onMove.invoke(getSelectedString())
                 this.invalidate()
             }
         }

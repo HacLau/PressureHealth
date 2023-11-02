@@ -45,26 +45,26 @@
     <string name="record_unit">mmHg</string>
     <string name="record_unit2">/mmHg</string>
 
-    <string name="title_hypotension">Hypotension</string>
-    <string name="title_normal">Normal</string>
-    <string name="title_elevated">High</string>
-    <string name="title_hs1">Stage 1</string>
-    <string name="title_hs2">Stage 2</string>
-    <string name="title_crisis">Hypertension</string>
+    <string name="title_h0">Hypotension</string>
+    <string name="title_h1">Normal</string>
+    <string name="title_h2">High</string>
+    <string name="title_h3">Stage 1</string>
+    <string name="title_h4">Stage 2</string>
+    <string name="title_h5">Hypertension</string>
 
-    <string name="content_hypotension">(sys &lt;90 or dia &lt;60)</string>
-    <string name="content_normal">(sys 90–119 and dia 60–79)</string>
-    <string name="content_elevated">(sys 120–129 and dia 60–79)</string>
-    <string name="content_hs1">(sys 130–139 or dia 80–89)</string>
-    <string name="content_hs2">(sys 140–180 or dia 90–120)</string>
-    <string name="content_crisis">(sys 180+ or dia 120+)</string>
+    <string name="content_h0">(sys &lt;90 or dia &lt;60)</string>
+    <string name="content_h1">(sys 90–119 and dia 60–79)</string>
+    <string name="content_h2">(sys 120–129 and dia 60–79)</string>
+    <string name="content_h3">(sys 130–139 or dia 80–89)</string>
+    <string name="content_h4">(sys 140–180 or dia 90–120)</string>
+    <string name="content_h5">(sys 180+ or dia 120+)</string>
 
-    <string name="des_hypotension">Stay adequately hydrated and exercise regularly.</string>
-    <string name="des_normal">Continue to maintain a healthy lifestyle. </string>
-    <string name="des_elevated">Pay attention to your diet and reduce salt intake.</string>
-    <string name="des_hs1">Improve your lifestyle, exercise regularly, and manage your diet.</string>
-    <string name="des_hs2">Consult a doctor early on, as medication may be necessary.</string>
-    <string name="des_crisis">Seek medical advice promptly and develop an appropriate treatment plan.</string>
+    <string name="des_h0">Stay adequately hydrated and exercise regularly.</string>
+    <string name="des_h1">Continue to maintain a healthy lifestyle. </string>
+    <string name="des_h2">Pay attention to your diet and reduce salt intake.</string>
+    <string name="des_h3">Improve your lifestyle, exercise regularly, and manage your diet.</string>
+    <string name="des_h4">Consult a doctor early on, as medication may be necessary.</string>
+    <string name="des_h5">Seek medical advice promptly and develop an appropriate treatment plan.</string>
 
 
     <string name="add_record_now">+ Record now</string>

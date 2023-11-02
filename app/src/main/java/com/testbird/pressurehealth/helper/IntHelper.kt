@@ -21,5 +21,16 @@ fun Int.month():String{
 }
 
 fun Int.dp2px(context: Context):Int{
-    return (context.resources.displayMetrics.density).toInt()
+    return (context.resources.displayMetrics.density * this).toInt()
+}
+
+fun Float.dp2px(context: Context):Float{
+    return (context.resources.displayMetrics.density * this)
+}
+
+fun Int.two():String{
+    return if (this < 10)
+        "0${this}"
+    else
+        "$this"
 }

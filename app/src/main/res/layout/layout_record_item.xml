@@ -39,7 +39,6 @@
             android:layout_marginStart="12dp"
             android:fontFamily="sans-serif-black"
             android:lineHeight="20sp"
-            android:text="@string/title_hypotension"
             android:textColor="@color/color_content_title"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/time"

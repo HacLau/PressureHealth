@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_app_0"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bg_pop_date"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_white_radius_19"
+        android:padding="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/pop_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineHeight="22sp"
+            android:text="@string/title_set_time"
+            android:textColor="@color/color_content_title"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17sp"
+            android:lineHeight="18sp"
+            android:text="@string/title_year"
+            android:textColor="@color/color_content_title"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pop_title" />
+
+        <com.testbird.pressurehealth.view.ui.NumberPicker
+            android:id="@+id/np_year"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_year"
+            app:normalTextColor="@color/color_picker_normal"
+            app:selectedTextColor="@color/color_picker_select" />
+
+        <View
+            android:id="@+id/line_year"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_fa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/np_year" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineHeight="18sp"
+            android:text="@string/title_month"
+            android:textColor="@color/color_content_title"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_year" />
+
+        <com.testbird.pressurehealth.view.ui.NumberPicker
+            android:id="@+id/np_month"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_month"
+            app:normalTextColor="@color/color_picker_normal"
+            app:selectedTextColor="@color/color_picker_select" />
+
+        <View
+            android:id="@+id/line_month"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_fa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/np_month" />
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineHeight="18sp"
+            android:text="@string/title_day"
+            android:textColor="@color/color_content_title"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_month" />
+
+        <com.testbird.pressurehealth.view.ui.NumberPicker
+            android:id="@+id/np_day"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_day"
+            app:normalTextColor="@color/color_picker_normal"
+            app:selectedTextColor="@color/color_picker_select" />
+
+        <View
+            android:id="@+id/line_day"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_fa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/np_day" />
+
+        <TextView
+            android:id="@+id/tv_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineHeight="18sp"
+            android:text="@string/title_hour"
+            android:textColor="@color/color_content_title"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_day" />
+
+        <com.testbird.pressurehealth.view.ui.NumberPicker
+            android:id="@+id/np_hour"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hour"
+            app:normalTextColor="@color/color_picker_normal"
+            app:selectedTextColor="@color/color_picker_select" />
+
+        <View
+            android:id="@+id/line_hour"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_fa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/np_hour" />
+
+        <TextView
+            android:id="@+id/tv_minute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineHeight="18sp"
+            android:text="@string/title_minute"
+            android:textColor="@color/color_content_title"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_hour" />
+
+        <com.testbird.pressurehealth.view.ui.NumberPicker
+            android:id="@+id/np_minute"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="4dp"
+            
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_minute"
+            app:normalTextColor="@color/color_picker_normal"
+            app:selectedTextColor="@color/color_picker_select" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pop_cancel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_button_gray_radius_16"
+            android:lineHeight="20sp"
+            android:text="@string/title_cancel"
+            android:textColor="@color/color_content_title"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pop_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/np_minute" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pop_confirm"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_button_blue_radius_16"
+            android:lineHeight="20sp"
+            android:text="@string/title_confirm"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pop_cancel"
+            app:layout_constraintTop_toBottomOf="@id/np_minute" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

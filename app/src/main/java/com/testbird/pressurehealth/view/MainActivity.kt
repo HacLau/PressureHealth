@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.testbird.pressurehealth.R
 import com.testbird.pressurehealth.adapter.DataAdapter
@@ -20,9 +21,12 @@ import com.testbird.pressurehealth.helper.log
 import com.testbird.pressurehealth.model.AppMainEntity
 import com.testbird.pressurehealth.model.ContentType
 import com.testbird.pressurehealth.model.ItemType
+import com.testbird.pressurehealth.model.RecordEntity
+import com.testbird.pressurehealth.model.RecordEntityTop
 import com.testbird.pressurehealth.viewmodel.ActivityModel
 
 class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
+    private lateinit var adapter: DataAdapter
     override fun initView() {
         binding.rg.setOnCheckedChangeListener { _, id ->
             when (id) {
@@ -40,21 +44,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
                 getSettingView()
             )
         )
+
         binding.mainVp.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
 
             override fun onPageSelected(position: Int) {
+                binding.llFilter.visibility = View.GONE
                 when (position) {
                     0 -> {
                         binding.rbHome.isChecked = true
-                        binding.mainTitle.text = DateHelper.getFormatTime(System.currentTimeMillis())
+                        binding.mainTitle.text = DateHelper.getFormatTimeMain(System.currentTimeMillis())
                     }
 
                     1 -> {
                         binding.rbRecord.isChecked = true
                         binding.mainTitle.text = getString(R.string.title_record)
+                        binding.llFilter.visibility = View.VISIBLE
                     }
 
                     2 -> {
@@ -79,48 +86,61 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
     private fun getHomeView(): View {
         val bind = LayoutMainBinding.inflate(LayoutInflater.from(this))
         bind.btnAdd.setOnClickListener {
-            startRecordNewActivity(ContentType.new)
+            startContentActivity(ContentType.new, title = getString(R.string.title_record_new))
         }
 
-        bind.mainRv.addItemDecoration(ItemDecoration(6))
+        bind.mainRv.addItemDecoration(ItemDecoration(12))
         bind.mainRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         bind.mainRv.adapter = DataAdapter(this, mutableListOf<AppMainEntity>().apply {
             viewModel.infoList.subList(
                 0, if (viewModel.infoList.size > 5) 5 else viewModel.infoList.size
             ).forEach {
-                add(AppMainEntity(itemType = ItemType.mainItem.ordinal, info = it))
+                add(AppMainEntity(itemType = ItemType.infoItem.type, info = it))
             }
-        })
+        }).apply {
+            onInfoItemClick = {
+                startContentActivity(type = ContentType.content, title = it?.title ?: "", infoEntity = it)
+            }
+        }
         return bind.root
     }
 
     private fun getRecordView(): View {
         val bind = LayoutRecordBinding.inflate(LayoutInflater.from(this))
         bind.recordNew.setOnClickListener {
-            startRecordNewActivity(ContentType.new)
+            startContentActivity(ContentType.new, title = getString(R.string.title_record_new))
         }
         bind.recordMore.setOnClickListener {
-            startRecordNewActivity(ContentType.more)
+            startContentActivity(ContentType.more, title = getString(R.string.title_record_more))
         }
 
-        bind.recordRv.addItemDecoration(ItemDecoration(6))
+        bind.recordRv.addItemDecoration(ItemDecoration(12))
         bind.recordRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        bind.recordRv.adapter = DataAdapter(this, mutableListOf<AppMainEntity>())
+        adapter = DataAdapter(this, mutableListOf()).apply {
+            onRecordItemClick = {
+                startContentActivity(type = ContentType.edit, title = "Edit Record", recordEntity = it)
+            }
+        }
+        bind.recordRv.adapter = adapter
         return bind.root
     }
 
     private fun getInfoView(): View {
         val bind = LayoutInfoBinding.inflate(LayoutInflater.from(this))
-        bind.infoRv.addItemDecoration(ItemDecoration(6))
+        bind.infoRv.addItemDecoration(ItemDecoration(12))
         bind.infoRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         bind.infoRv.adapter = DataAdapter(this, mutableListOf<AppMainEntity>().apply {
             viewModel.infoList.forEach {
-                add(AppMainEntity(itemType = ItemType.mainItem.ordinal, info = it))
+                add(AppMainEntity(itemType = ItemType.mainItem.type, info = it))
             }
-        })
+        }).apply {
+            onInfoItemClick = {
+                startContentActivity(type = ContentType.content, title = it?.title ?: "", infoEntity = it)
+            }
+        }
         return bind.root
     }
 
@@ -132,14 +152,66 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
         bind.settingRv.adapter = DataAdapter(this, mutableListOf<AppMainEntity>().apply {
             "settingList.size = ${viewModel.settingList.size}".log()
             viewModel.settingList.forEach {
-                add(AppMainEntity(itemType = if (this.size == 0) ItemType.settingTop.ordinal else ItemType.settingItem.ordinal, setting = it))
+                add(AppMainEntity(itemType = if (this.size == 0) ItemType.settingTop.type else ItemType.settingItem.type, setting = it))
             }
-        })
+        }).apply {
+            onSettingItemClick = { entity ->
+                "entity?.title = ${entity?.title}".log()
+                entity?.let {
+                    when (it.title) {
+                        getString(R.string.title_privacy) -> startContentActivity(
+                            ContentType.web,
+                            title = getString(R.string.title_privacy),
+                            url = "https://www.jianshu.com/p/05bc825fa194"
+                        )
+
+                        getString(R.string.title_policy) -> startContentActivity(
+                            ContentType.web,
+                            title = getString(R.string.title_policy),
+                            url = "https://blog.csdn.net/SanSanOtaku/article/details/119932790"
+                        )
+
+                        getString(R.string.title_share) -> sharedMySelf()
+                    }
+                }
+            }
+        }
         return bind.root
     }
 
     override fun initViewModel(): ActivityModel = ViewModelProvider(this)[ActivityModel::class.java]
 
     override fun initViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+
+    override fun onResume() {
+        super.onResume()
+        getRecordList()
+    }
+
+    private fun getRecordList() {
+        adapter.setList(
+            mutableListOf<AppMainEntity>().apply {
+                var sys = 0
+                var dia = 0
+                var size = if (viewModel.recordList.size > 3) 3 else viewModel.recordList.size
+                viewModel.recordList.subList(0, size).forEach {
+                    sys += it.sys
+                    dia += it.dia
+                    add(AppMainEntity(itemType = ItemType.recordItem.type, record = it))
+                }
+                add(
+                    0,
+                    AppMainEntity(
+                        itemType = ItemType.recordTop.type, recordTop = RecordEntityTop(
+                            sys = if (size == 0) 0 else sys / size,
+                            dia = if (size == 0) 0 else dia / size
+                        )
+                    )
+                )
+                if (viewModel.recordList.size > 0)
+                    add(1, AppMainEntity(itemType = ItemType.recordChart.type, recordChart = viewModel.recordList))
+            }
+        )
+    }
 
 }

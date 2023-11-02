@@ -87,6 +87,7 @@
                 android:id="@+id/np_sys"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
+                android:background="@drawable/bg_picker_scale"
                 app:layout_constraintTop_toBottomOf="@id/ll_sys" />
 
             <ImageView
@@ -141,6 +142,7 @@
                 android:id="@+id/np_dias"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
+                android:background="@drawable/bg_picker_scale"
                 app:layout_constraintTop_toBottomOf="@id/ll_dias" />
 
             <ImageView
@@ -173,10 +175,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/level_question"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 android:src="@mipmap/ic_news_question"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -189,7 +193,6 @@
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
                 android:lineHeight="26sp"
-                android:text="@string/title_hypotension"
                 android:textColor="@color/result_0"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -202,7 +205,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="@string/content_hypotension"
                 android:textColor="@color/result_0"
                 android:textFontWeight="400"
                 android:textSize="11sp"
@@ -220,7 +222,6 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="@string/des_crisis"
                 android:textSize="13sp"
                 android:lines="2"
                 android:lineHeight="21sp"
@@ -310,11 +311,11 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_triangle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/ll_degree"
                 app:layout_constraintTop_toBottomOf="@id/ll_degree" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
+            android:id="@+id/record_save"
             android:layout_width="320dp"
             android:layout_height="51dp"
             android:text="@string/title_confirm"
