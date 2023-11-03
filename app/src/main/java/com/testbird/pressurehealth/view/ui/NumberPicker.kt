@@ -71,9 +71,9 @@ class NumberPicker :View{
     private fun initAttrs(attrs: AttributeSet?) {
         val tta = context!!.obtainStyledAttributes(attrs, R.styleable.NumberPicker)
         seeSize = tta.getInteger(R.styleable.NumberPicker_seesize, 5)
-        selectedTextSize = tta.getFloat(R.styleable.NumberPicker_selectedTextSize, 60.0f)
+        selectedTextSize = tta.getFloat(R.styleable.NumberPicker_selectedTextSize, 50.0f)
         selectedColor = tta.getColor(R.styleable.NumberPicker_selectedTextColor, context!!.resources.getColor(R.color.white))
-        textSize = tta.getFloat(R.styleable.NumberPicker_normalTextSize, 50.0f)
+        textSize = tta.getFloat(R.styleable.NumberPicker_normalTextSize, 40.0f)
         textColor = tta.getColor(R.styleable.NumberPicker_normalTextColor, context!!.resources.getColor(R.color.color_80))
     }
 

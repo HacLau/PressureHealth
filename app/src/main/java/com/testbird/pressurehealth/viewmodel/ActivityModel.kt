@@ -8,6 +8,7 @@ import com.testbird.pressurehealth.helper.AssetsHelper
 import com.testbird.pressurehealth.helper.DateHelper
 import com.testbird.pressurehealth.helper.two
 import com.testbird.pressurehealth.helper.log
+import com.testbird.pressurehealth.model.FilterRecordType
 import com.testbird.pressurehealth.model.InfoEntity
 import com.testbird.pressurehealth.model.RecordEntity
 import com.testbird.pressurehealth.model.SettingEntity
@@ -16,6 +17,7 @@ import org.json.JSONArray
 
 
 class ActivityModel : ViewModel() {
+    var filterRecordType: String = FilterRecordType.recent
     val infoList: List<InfoEntity>
         get() {
             val infoJson: String = AssetsHelper.getJsonFromAssets("info.json")
@@ -33,12 +35,12 @@ class ActivityModel : ViewModel() {
     val settingList: List<SettingEntity>
         get() {
             return mutableListOf<SettingEntity>().apply {
-                add(SettingEntity(appContext.getString(R.string.title_alarm)))
-                add(SettingEntity(appContext.getString(R.string.title_language)))
+//                add(SettingEntity(appContext.getString(R.string.title_alarm)))
+//                add(SettingEntity(appContext.getString(R.string.title_language)))
                 add(SettingEntity(appContext.getString(R.string.title_share)))
                 add(SettingEntity(appContext.getString(R.string.title_privacy)))
                 add(SettingEntity(appContext.getString(R.string.title_policy)))
-                add(SettingEntity(appContext.getString(R.string.title_contact), appContext.getString(R.string.title_mail)))
+//                add(SettingEntity(appContext.getString(R.string.title_contact), appContext.getString(R.string.title_mail)))
             }
         }
 

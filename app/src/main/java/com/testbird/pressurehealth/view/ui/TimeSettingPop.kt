@@ -29,6 +29,8 @@ class TimeSettingPop(
         isFocusable = true
         background.alpha = 160
         animationStyle = R.style.pop_anim_style
+        binding = LayoutSetTimeBinding.inflate(LayoutInflater.from(context))
+        contentView = binding.root
         initView()
         initData()
     }
@@ -37,12 +39,12 @@ class TimeSettingPop(
         dateArray = DateHelper.getCurrentDateArrayByMill(time)
         binding.npYear.setData(yearList, yearList.indexOf(dateArray[0].two()))
         binding.npMonth.setData(monthList, monthList.indexOf(dateArray[1].two()))
+        setDay(getDayPickerDataList(dateArray[0], dateArray[1]))
         binding.npHour.setData(hourList, hourList.indexOf(dateArray[3].two()))
         binding.npMinute.setData(minuteList, minuteList.indexOf(dateArray[4].two()))
     }
 
     private fun initView() {
-        binding = LayoutSetTimeBinding.inflate(LayoutInflater.from(context))
         binding.popCancel.setOnClickListener {
             dismiss()
             cancel.invoke()
@@ -87,7 +89,10 @@ class TimeSettingPop(
     }
 
     private fun setDay(list: MutableList<String>) {
-        binding.npDay.setData(list, if (list.size > dateArray[2]) list.size - 1 else list.indexOf(dateArray[2].two()))
+        binding.npDay.setData(list, if (list.size < dateArray[2]) {
+            dateArray[2] = list[list.size - 1].toInt()
+            list.size - 1
+        }else list.indexOf(dateArray[2].two()))
     }
 
 }

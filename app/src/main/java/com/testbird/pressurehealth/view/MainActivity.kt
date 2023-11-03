@@ -20,10 +20,13 @@ import com.testbird.pressurehealth.helper.DateHelper
 import com.testbird.pressurehealth.helper.log
 import com.testbird.pressurehealth.model.AppMainEntity
 import com.testbird.pressurehealth.model.ContentType
+import com.testbird.pressurehealth.model.FilterRecordType
 import com.testbird.pressurehealth.model.ItemType
 import com.testbird.pressurehealth.model.RecordEntity
 import com.testbird.pressurehealth.model.RecordEntityTop
+import com.testbird.pressurehealth.view.ui.FilterRecordPop
 import com.testbird.pressurehealth.viewmodel.ActivityModel
+import java.util.Calendar
 
 class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
     private lateinit var adapter: DataAdapter
@@ -44,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
                 getSettingView()
             )
         )
-
+        binding.mainTitle.text = DateHelper.getFormatTimeMain(System.currentTimeMillis())
         binding.mainVp.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
@@ -81,12 +84,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
             }
 
         })
+        binding.llFilter.setOnClickListener {
+            FilterRecordPop(this).apply {
+                onItemClick = {
+                    binding.recordFilter.text = it
+                    viewModel.filterRecordType = it
+                    getRecordList()
+                }
+            }.showAsDropDown(binding.llFilter)
+        }
     }
 
     private fun getHomeView(): View {
         val bind = LayoutMainBinding.inflate(LayoutInflater.from(this))
         bind.btnAdd.setOnClickListener {
-            startContentActivity(ContentType.new, title = getString(R.string.title_record_new))
+            startContentActivity(ContentType.new, title = getString(R.string.title_record_new)) {
+                binding.mainVp.currentItem = 1
+            }
         }
 
         bind.mainRv.addItemDecoration(ItemDecoration(12))
@@ -150,9 +164,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
         bind.settingRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         bind.settingRv.adapter = DataAdapter(this, mutableListOf<AppMainEntity>().apply {
-            "settingList.size = ${viewModel.settingList.size}".log()
+
             viewModel.settingList.forEach {
-                add(AppMainEntity(itemType = if (this.size == 0) ItemType.settingTop.type else ItemType.settingItem.type, setting = it))
+                add(
+                    AppMainEntity(
+                        itemType = if (it.title == getString(R.string.title_alarm)) ItemType.settingTop.type else ItemType.settingItem.type,
+                        setting = it
+                    )
+                )
             }
         }).apply {
             onSettingItemClick = { entity ->
@@ -193,8 +212,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, ActivityModel>() {
             mutableListOf<AppMainEntity>().apply {
                 var sys = 0
                 var dia = 0
-                var size = if (viewModel.recordList.size > 3) 3 else viewModel.recordList.size
-                viewModel.recordList.subList(0, size).forEach {
+
+                val list = viewModel.recordList.filter {
+                    when (viewModel.filterRecordType) {
+                        FilterRecordType.recent -> it.time > DateHelper.getTodayMills()
+                        FilterRecordType.week -> it.time < DateHelper.getDayOfWeek(
+                            Calendar.SATURDAY,
+                            0
+                        ) && it.time > DateHelper.getDayOfWeek(Calendar.SUNDAY, 0)
+
+                        FilterRecordType.seven -> it.time > DateHelper.getLast7DaysMills()
+                        FilterRecordType.month -> it.time > DateHelper.getThisMonthStart()
+                        FilterRecordType.lastMonth -> it.time > DateHelper.getLastMonthStart() && it.time < DateHelper.getThisMonthStart()
+                        else -> it.time < System.currentTimeMillis()
+                    }
+                }
+                val size = if (list.size > 5) 5 else list.size
+                list.subList(0, size).forEach {
                     sys += it.sys
                     dia += it.dia
                     add(AppMainEntity(itemType = ItemType.recordItem.type, record = it))

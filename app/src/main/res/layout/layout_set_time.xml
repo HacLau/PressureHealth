@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_app_0"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bg_pop_date"
@@ -48,6 +47,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_year"
+            app:selectedTextSize="36"
+            app:normalTextSize="32"
             app:normalTextColor="@color/color_picker_normal"
             app:selectedTextColor="@color/color_picker_select" />
 
@@ -78,6 +79,8 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="4dp"
+            app:selectedTextSize="36"
+            app:normalTextSize="32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_month"
@@ -111,6 +114,8 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="4dp"
+            app:selectedTextSize="36"
+            app:normalTextSize="32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_day"
@@ -144,6 +149,8 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="4dp"
+            app:selectedTextSize="36"
+            app:normalTextSize="32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_hour"
@@ -177,7 +184,9 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="4dp"
-            
+
+            app:selectedTextSize="36"
+            app:normalTextSize="32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_minute"

@@ -1,5 +1,6 @@
 package com.testbird.pressurehealth.view
 
+import android.app.Activity
 import android.content.res.ColorStateList
 import android.view.Gravity
 import android.view.View
@@ -31,6 +32,7 @@ class ContentActivity : BaseActivity<ActivityContentBinding, ActivityModel>() {
     private lateinit var recordEntity: RecordEntity
     override fun initView() {
         binding.back.setOnClickListener {
+            setResult(Activity.RESULT_CANCELED)
             finish()
         }
         currentType = intent.getStringExtra(Contacts.pageType) ?: ""
@@ -48,21 +50,6 @@ class ContentActivity : BaseActivity<ActivityContentBinding, ActivityModel>() {
 
     override fun onResume() {
         super.onResume()
-        if (currentType == ContentType.more.type) {
-            getMoreRecordData()
-        }
-    }
-
-    private fun getMoreRecordData() {
-        (binding.moreCl.moreRv.adapter as DataAdapter).setList(mutableListOf<AppMainEntity>().apply {
-            var sys = 0
-            var dia = 0
-            viewModel.recordList.forEach {
-                sys += it.sys
-                dia += it.dia
-                add(AppMainEntity(itemType = ItemType.recordItem.type, record = it))
-            }
-        })
     }
 
     private fun initNewAndEditRecord() {
@@ -111,6 +98,7 @@ class ContentActivity : BaseActivity<ActivityContentBinding, ActivityModel>() {
             ContentType.edit.type -> RecordDatabase.getDatabase().recordDao().update(recordEntity)
             ContentType.new.type -> RecordDatabase.getDatabase().recordDao().insert(recordEntity)
         }
+        setResult(Activity.RESULT_OK)
         finish()
     }
 
@@ -236,27 +224,41 @@ class ContentActivity : BaseActivity<ActivityContentBinding, ActivityModel>() {
     private fun initNoRecord() {
         binding.recordNoCl.root.visibility = View.VISIBLE
         binding.recordNoCl.recordNoGo.setOnClickListener {
-            startContentActivity(type = ContentType.edit, title = getString(R.string.title_record_new))
+            startContentActivity(type = ContentType.new, title = getString(R.string.title_record_new)){
+                finish()
+            }
         }
     }
 
     private fun initHaveRecord() {
         binding.moreCl.root.visibility = View.VISIBLE
+    }
+
+    private fun initMoreRecord() {
         binding.moreCl.moreRv.addItemDecoration(ItemDecoration(12))
         binding.moreCl.moreRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        binding.moreCl.moreRv.adapter = DataAdapter(this, mutableListOf()).apply {
+        binding.moreCl.moreRv.adapter = DataAdapter(this, getMoreRecordData()).apply {
             onRecordItemClick = {
                 startContentActivity(type = ContentType.edit, title = "Edit Record", recordEntity = it)
             }
         }
-    }
 
-    private fun initMoreRecord() {
         if (viewModel.recordList.isEmpty())
             initNoRecord()
         else
             initHaveRecord()
+    }
+
+    private fun getMoreRecordData():MutableList<AppMainEntity> {
+        return mutableListOf<AppMainEntity>().apply {
+            var sys = 0
+            var dia = 0
+            viewModel.recordList.forEach {
+                sys += it.sys
+                dia += it.dia
+                add(AppMainEntity(itemType = ItemType.recordItem.type, record = it))
+            }
+        }
     }
 
 

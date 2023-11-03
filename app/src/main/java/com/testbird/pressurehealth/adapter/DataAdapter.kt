@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.testbird.pressurehealth.R
 import com.testbird.pressurehealth.databinding.LayoutInfoItemBinding
@@ -76,11 +77,11 @@ class DataAdapter(
         when (getItemViewType(position)) {
             ItemType.mainItem.type -> {
                 if (holder is InformationVH) {
-                    list[position].info.let { entity ->
+                    list[position].info?.let { entity ->
                         holder.binding.let {
-                            it.title.text = entity?.title
-                            it.content.text = entity?.content
-                            it.image.setImageResource(entity?.image?:R.mipmap.ic_degree_0)
+                            it.title.text = entity.title
+                            it.content.text = entity.content
+                            it.image.setImageResource(entity.image)
                         }
                         holder.binding.root.setOnClickListener {
                             onInfoItemClick.invoke(entity)
@@ -121,15 +122,18 @@ class DataAdapter(
                             it.numBottom.text = "${minNumber + (maxNumber - minNumber) / 4 * 1}"
                             it.numMin.text = "$minNumber"
                         }
+                        holder.binding.recordChartRv.addItemDecoration(ItemChartDecoration(0))
+                        holder.binding.recordChartRv.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+                        holder.binding.recordChartRv.adapter = ChartAdapter(context,chartList,maxNumber,minNumber)
                     }
                 }
             }
 
             ItemType.recordItem.type -> {
                 if (holder is RecordItemVH) {
-                    list[position].record.let { entity ->
+                    list[position].record?.let { entity ->
                         holder.binding.let {
-                            it.title.text = when (entity?.level) {
+                            it.title.text = when (entity.level) {
                                 0 -> context.getString(R.string.title_h0)
                                 1 -> context.getString(R.string.title_h1)
                                 2 -> context.getString(R.string.title_h2)
@@ -138,11 +142,11 @@ class DataAdapter(
                                 5 -> context.getString(R.string.title_h5)
                                 else -> context.getString(R.string.title_h0)
                             }
-                            it.sysNumber.text = "${entity?.sys}"
-                            it.diasNumber.text = "${entity?.dia}"
-                            it.time.text = entity?.time?.let { time -> DateHelper.getFormatTimeRecordItem(time) }
+                            it.sysNumber.text = "${entity.sys}"
+                            it.diasNumber.text = "${entity.dia}"
+                            it.time.text = entity.time?.let { time -> DateHelper.getFormatTimeRecordItem(time) }
                             it.levelImage.setImageResource(
-                                when (entity?.level) {
+                                when (entity.level) {
                                     0 -> R.mipmap.ic_degree_0
                                     1 -> R.mipmap.ic_degree_1
                                     2 -> R.mipmap.ic_degree_2
@@ -163,11 +167,11 @@ class DataAdapter(
 
             ItemType.infoItem.type -> {
                 if (holder is InformationVH) {
-                    list[position].info.let { entity ->
+                    list[position].info?.let { entity ->
                         holder.binding.let {
-                            it.title.text = entity?.title
-                            it.content.text = entity?.content
-                            it.image.setImageResource(infoImageList.random())
+                            it.title.text = entity.title
+                            it.content.text = entity.content
+                            it.image.setImageResource(entity.image)
                         }
                         holder.binding.root.setOnClickListener {
                             onInfoItemClick.invoke(entity)

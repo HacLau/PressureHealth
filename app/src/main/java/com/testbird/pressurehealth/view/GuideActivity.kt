@@ -10,7 +10,9 @@ import com.testbird.pressurehealth.databinding.ActivityGuideBinding
 import com.testbird.pressurehealth.helper.ContactHelper
 import com.testbird.pressurehealth.helper.log
 import com.testbird.pressurehealth.helper.or
+import com.testbird.pressurehealth.helper.toast
 import com.testbird.pressurehealth.helper.yes
+import com.testbird.pressurehealth.model.ContentType
 import com.testbird.pressurehealth.viewmodel.ActivityModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,11 +34,31 @@ class GuideActivity : BaseActivity<ActivityGuideBinding, ActivityModel>() {
     }
 
     private fun showStart() {
-        ContactHelper.isLauncherStart = true
+
         binding.guideSplashStart.visibility = View.VISIBLE
         binding.guideStep.visibility = View.GONE
         binding.btnStart.setOnClickListener {
-            showSplash()
+            if (binding.rdStart.isChecked) {
+                ContactHelper.isLauncherStart = true
+                showSplash()
+            }else{
+                "please check the Agree User Policy and Privacy Agreement".toast(this)
+            }
+
+        }
+        binding.guidePolicy.setOnClickListener {
+            startContentActivity(ContentType.web,
+                title = getString(R.string.title_policy),
+                url = "https://blog.csdn.net/SanSanOtaku/article/details/119932790"
+            )
+        }
+        binding.guidePrivacy.setOnClickListener {
+            startContentActivity(
+                ContentType.web,
+                title = getString(R.string.title_privacy),
+                url = "https://www.jianshu.com/p/05bc825fa194"
+            )
+
         }
     }
 
@@ -89,22 +111,23 @@ class GuideActivity : BaseActivity<ActivityGuideBinding, ActivityModel>() {
         var startCountDown = false
         Timer().schedule(object : TimerTask() {
             override fun run() {
-                if (binding.guideProgress.progress >= 100) {
-                    cancel()
-                    startCountDown.yes {
-                        startCountDown = false
-                        "startMainActivity".log()
-                        CoroutineScope(Dispatchers.Main).launch {
-                            ContactHelper.isLauncherStep.or(funTrue = {
-                                startMainActivity()
-                            }, funFalse = {
-                                showStep()
-                            })
+                if (isResume) {
+                    if (binding.guideProgress.progress >= 100) {
+                        cancel()
+                        startCountDown.yes {
+                            startCountDown = false
+                            CoroutineScope(Dispatchers.Main).launch {
+                                ContactHelper.isLauncherStep.or(funTrue = {
+                                    startMainActivity()
+                                }, funFalse = {
+                                    showStep()
+                                })
+                            }
                         }
+                    } else {
+                        startCountDown = true
+                        binding.guideProgress.progress++
                     }
-                } else {
-                    startCountDown = true
-                    binding.guideProgress.progress++
                 }
             }
 

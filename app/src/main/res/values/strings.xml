@@ -6,7 +6,10 @@
     <string name="text_skip">Skip</string>
     <string name="text_time">August 19,2023</string>
     <string name="text_start_record">Start Record</string>
-    <string name="text_policy">Agree User Policy and Privacy Agreement</string>
+
+    <string name="text_policy"><u>Agree User Policy</u></string>
+    <string name="text_and">and</string>
+    <string name="text_privacy"><u>Privacy Agreement</u></string>
 
     <string name="text_step_title_1">Protecting the heart starts with healthy blood pressure</string>
     <string name="text_step_title_2">Grasp blood pressure trends and predict a healthy future</string>
@@ -70,11 +73,18 @@
     <string name="add_record_now">+ Record now</string>
     <string name="add_record_new">+ New record</string>
     <string name="record_more">More</string>
-    <string name="record_recent">Recent records</string>
     <string name="record_new_time">2023-08-04  14:35</string>
     <string name="record_no">No record!</string>
     <string name="record_now">Record now</string>
     <string name="home_top_title">Blood pressure record</string>
     <string name="home_top_content">Keep recording your blood pressure to understand your health status</string>
+
+
+    <string name="record_recent">Recent Records</string>
+    <string name="record_week">This Week</string>
+    <string name="record_last_7days">Last 7 days</string>
+    <string name="record_month">This Month</string>
+    <string name="record_last_month">Last Month</string>
+    <string name="record_all">All</string>
 
 </resources>

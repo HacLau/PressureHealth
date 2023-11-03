@@ -68,7 +68,6 @@
         layout="@layout/layout_record_no"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_top_radius_32"
         android:padding="20dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

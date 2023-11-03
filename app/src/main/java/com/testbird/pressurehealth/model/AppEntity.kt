@@ -25,7 +25,7 @@ enum class ContentType(val type: String) {
 }
 
 object Contacts {
-    val title: String = ""
+    val title = "title"
     val pageType = "pageType"
     val infoEntity = "infoEntity"
     val recordEntity = "recordEntity"
@@ -83,15 +83,15 @@ val infoImageList = mutableListOf<Int>(
     R.mipmap.ic_news_image4,
 
     )
+object FilterRecordType{
+    val recent = appContext.getString(R.string.record_recent)
+    val week = appContext.getString(R.string.record_week)
+    val seven = appContext.getString(R.string.record_last_7days)
+    val month = appContext.getString(R.string.record_month)
+    val lastMonth = appContext.getString(R.string.record_last_month)
+    val all = appContext.getString(R.string.record_all)
+}
 
-val mineList = mutableListOf<AppMainEntity>(
-    AppMainEntity(itemType = ItemType.settingTop.type, setting = SettingEntity(appContext.getString(R.string.title_alarm))),
-    AppMainEntity(itemType = ItemType.settingItem.type, setting = SettingEntity(appContext.getString(R.string.title_language))),
-    AppMainEntity(itemType = ItemType.settingItem.type, setting = SettingEntity(appContext.getString(R.string.title_alarm))),
-    AppMainEntity(itemType = ItemType.settingItem.type, setting = SettingEntity(appContext.getString(R.string.title_alarm))),
-    AppMainEntity(itemType = ItemType.settingItem.type, setting = SettingEntity(appContext.getString(R.string.title_alarm))),
-    AppMainEntity(itemType = ItemType.settingItem.type, setting = SettingEntity(appContext.getString(R.string.title_alarm)))
-)
 
 
 

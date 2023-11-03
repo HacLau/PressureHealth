@@ -72,7 +72,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/rd_start"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -84,14 +84,41 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_start" />
 
             <TextView
+                android:id="@+id/guide_policy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@string/text_policy"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="@id/btn_start"
+                android:textSize="12sp"
+                android:autoLink="web"
+                app:layout_constraintBottom_toBottomOf="@id/rd_start"
                 app:layout_constraintStart_toEndOf="@id/rd_start"
+                app:layout_constraintTop_toTopOf="@id/rd_start" />
+
+            <TextView
+                android:id="@+id/guide_and"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/text_and"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/rd_start"
+                app:layout_constraintStart_toEndOf="@id/guide_policy"
+                app:layout_constraintTop_toTopOf="@id/rd_start" />
+
+            <TextView
+                android:id="@+id/guide_privacy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/text_privacy"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:autoLink="web"
+                app:layout_constraintBottom_toBottomOf="@id/rd_start"
+                app:layout_constraintStart_toEndOf="@id/guide_and"
                 app:layout_constraintTop_toTopOf="@id/rd_start" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,8 +129,8 @@
         android:id="@+id/guide_step"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@mipmap/bg_app_1">
+        android:background="@mipmap/bg_app_1"
+        android:visibility="gone">
 
 
         <androidx.viewpager.widget.ViewPager
@@ -117,12 +144,12 @@
             android:id="@+id/guide_skip"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:gravity="end|center"
+            android:paddingStart="24dp"
+            android:paddingEnd="20dp"
             android:text="@string/text_skip"
             android:textColor="@color/color_blue"
-            android:layout_marginTop="24dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="24dp"
-            android:gravity="end|center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -130,24 +157,24 @@
             android:id="@+id/guide_skip_next"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:textSize="20sp"
-            android:lineHeight="32sp"
-            android:gravity="center"
             android:fontFamily="sans-serif-black"
-            android:textColor="@color/white"
+            android:gravity="center"
+            android:lineHeight="32sp"
             android:text="@string/text_next"
-            app:layout_constraintTop_toBottomOf="@id/guide_vp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guide_vp" />
 
         <ImageView
             android:id="@+id/guide_skip_next_image"
             android:layout_width="43dp"
             android:layout_height="120dp"
+            android:src="@mipmap/ic_next_step"
             android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="@id/guide_skip_next"
             app:layout_constraintBottom_toBottomOf="@id/guide_skip_next"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@mipmap/ic_next_step"/>
+            app:layout_constraintTop_toTopOf="@id/guide_skip_next" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
